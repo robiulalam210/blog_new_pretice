@@ -2,6 +2,7 @@ import 'package:blog_new_pretice/view_model/singin_bloc/signin_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'parasol/view/SigninView/ui/signin_view.dart';
 import 'view/home_view/home_view.dart';
 import 'view/sign_in_view/sigin_view.dart';
 import 'view_model/internet_bloc/internet_bloc.dart';
@@ -32,7 +33,8 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: BlocProvider(create: (BuildContext context) => SignInBloc(),child: SignView(),),
+        home:const MobileSignInView()
+        //BlocProvider(create: (BuildContext context) => SignInBloc(),child: SignView(),),
       ),
     );
   }
