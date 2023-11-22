@@ -1,39 +1,58 @@
-import 'dart:async';
-
 import 'package:blog_new_pretice/view_model/singin_bloc/sigin_state.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../respository/sigin_respository/auth_repository.dart';
 import 'signin_event.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
-  final AuthRepository authApi;
+  SignInBloc() : super(SignInInitialState()) {
+    //  AuthRepository? authApi;
 
-  SignInBloc({ this.authApi}) : super(SignInInitialState()) {
     on<SignInTextChangeEvent>((event, emit) {
       if (EmailValidator.validate(event.emailValue) == false) {
-        emit(SingInErrorState("Please enter a valid email address"));
+        emit(SignInErrorState("Please enter a valid email address"));
       } else if (event.passwordValue.length < 8) {
-        emit(SingInErrorState("Plase enter a valid password"));
+        emit(SignInErrorState("Plase enter a valid password"));
       } else {
         emit(SingInValidState());
       }
     });
-    on<SignInSubmittedEvent>((event, emit)async {
+    on<SignInSubmittedEvent>((event, emit) async {
       if (event is SignInEvent) {
-        emit(SignInLoadingState());
-
         try {
-          Map<String, dynamic>  body = {
-            'email' : event.email,
-            'password' : event.password
-          };
-          final token = await authApi.loginApi(body).then((value){
-            print(value);
-          });
+          emit(SignInLoadingState());
 
+          Map body = {'email': event.email, 'password': event.password};
+          // Make API call to authenticate user
+          // final response = await http.post(
+          //   Uri.parse(AppUrls.login),
+          //   body: {'email': event.email, 'password': event.password},
+          // );
+          final repo = AuthRepository();
+          final posts = await repo.loginApi(body);
+
+          emit(SignInFetchingSuccessfulState(login: posts));
+          print(posts);
+          // if (response.statusCode == 201) {
+          //   // Authenticated();
+          //   // Navigator.push(
+          //   //   context,
+          //   //   MaterialPageRoute(
+          //   //     builder: (context) => HomeView(),
+          //   //   ),
+          //   // );
+          //   print("Successful");
+          // } else {
+          //   print("Successful Failes");
+          //
+          //   // yield AuthError(message: 'Login failed');
+          // }
         } catch (error) {
+          emit(SignInLoadingState());
+
+          print("Error $error");
         }
       }
     });

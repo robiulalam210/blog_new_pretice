@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: BlocProvider(create: (BuildContext context) => SignInBloc(authApi: null),child: SignView(),),
+        home: BlocProvider(create: (BuildContext context) => SignInBloc(),child: SignView(),),
       ),
     );
   }

@@ -1,4 +1,4 @@
-abstract class SignInEvent{}
+abstract class SignInEvent {}
 
 class SignInTextChangeEvent extends SignInEvent{
   final String emailValue;

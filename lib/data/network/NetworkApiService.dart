@@ -27,13 +27,14 @@ class NetworkApiServices extends BaseApiServices {
   }
 
   @override
-  Future<dynamic> postApi(String url,body) async {
+  Future<dynamic> postApi(String url, body) async {
     dynamic responseJson;
     try {
-      final response =
-          await http.post(Uri.parse(url),body: body, headers: headerValue).timeout(
-                const Duration(seconds: 20),
-              );
+      final response = await http
+          .post(Uri.parse(url), body: body, headers: headerValue)
+          .timeout(
+            const Duration(seconds: 20),
+          );
       responseJson = returnResponse(response);
     } on SocketException {
       throw InternetException('');
@@ -46,6 +47,9 @@ class NetworkApiServices extends BaseApiServices {
   dynamic returnResponse(http.Response response) {
     switch (response.statusCode) {
       case 200:
+        dynamic responseJson = jsonDecode(response.body);
+        return responseJson;
+      case 201:
         dynamic responseJson = jsonDecode(response.body);
         return responseJson;
       case 302:

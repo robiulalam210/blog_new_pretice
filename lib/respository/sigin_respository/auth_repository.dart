@@ -21,6 +21,7 @@ class AuthRepository {
       rethrow;
     }
   }
+
 //
 // Future<SendVerificationModel> sendOTP(
 //     {required Map<String, dynamic> body}) async {
