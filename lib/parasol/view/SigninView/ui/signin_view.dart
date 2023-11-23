@@ -3,8 +3,10 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:blog_new_pretice/parasol/view/SignUp/singup_bloc/signin_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../res/customs/custom_label_for_text_field.dart';
 import '../../../../res/customs/custom_text_button.dart';
@@ -14,7 +16,8 @@ import '../../../../res/customs/customs_submit_button.dart';
 import '../../../../res/utils/colors_code.dart';
 import '../../../../res/utils/images.dart';
 import '../../../../res/utils/styles.dart';
-
+import '../../../../view_model/singin_bloc/signin_bloc.dart';
+import '../../SignUp/ui/otp_send_for_registration.dart';
 
 // ignore: must_be_immutable
 class MobileSignInView extends StatefulWidget {
@@ -34,16 +37,15 @@ class _MobileSignInViewState extends State<MobileSignInView> {
 
   @override
   void initState() {
-
     // TODO: implement initState
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
         return Future.value(false);
-
       },
       child: Scaffold(
         backgroundColor: ColorsCode.page_background_color,
@@ -62,7 +64,7 @@ class _MobileSignInViewState extends State<MobileSignInView> {
                     Images.logo,
                     height: MediaQuery.of(context).size.height * .30,
                     // MediaQuery.of(context).size.height * .30,
-                    width:MediaQuery.of(context).size.width * .40,
+                    width: MediaQuery.of(context).size.width * .40,
                     fit: BoxFit.contain,
                   )),
 
@@ -137,19 +139,14 @@ class _MobileSignInViewState extends State<MobileSignInView> {
                           style1: Style.robotoRegular,
                           style2: Style.text_style,
                           onPressed: () {
-                           // Get.toNamed(RouteManeger.otpsendForRegistration);
-                          })),
-                  Style.distan_size15,
-                  Center(
-                      child: CustomtWinkwellButton(
-                          text1: "Visit parasol  ",
-                          text2: "NewsFeed",
-                          style1: Style.robotoRegular,
-                          style2: Style.text_style,
-                          onPressed: () {
-                            // showCustomSnackBarUpComing('Coming Soon', true);
+                            print("object");
+                            // BlocProvider(
+                            //     create: (BuildContext context) => OtpSendBloc(),
+                            //     child: OtpSendForRegitration());
 
-                           // Get.to(Newsfeed());
+                            Navigator.push(context, MaterialPageRoute(
+                                builder: (context)=>OtpSendForRegitration()));
+                            // Get.toNamed(RouteManeger.otpsendForRegistration);
                           })),
                 ],
               ),

@@ -1,3 +1,4 @@
+import 'package:blog_new_pretice/parasol/view/SignUp/singup_bloc/signin_bloc.dart';
 import 'package:blog_new_pretice/view_model/singin_bloc/signin_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,8 +18,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (BuildContext context) => InternetBloc(),
+    return MultiBlocProvider(
+     // create: (BuildContext context) => InternetBloc(),
+      providers: [
+        BlocProvider(create: (BuildContext context) => InternetBloc(),),
+        BlocProvider(create: (BuildContext context) => OtpSendBloc(),),
+
+
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Bloc',

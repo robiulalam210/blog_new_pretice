@@ -22,5 +22,18 @@ class AppUrls {
   static const String login = '$baseUrlIP/login-with-saas';
 // ignore: constant_identifier_names
   static const String DASHBOARD_BANNER = "https://newsapi.org/v2/everything?q=tesla&from=2023-09-01&sortBy=publishedAt&apiKey=4b786dad4c714d329a3c4b8939a890ad";
+  // ignore: constant_identifier_names
+  static const String BASE_URL_PARASOL = "https://parasol.supportreflexsoft.xyz";
 
+  // ignore: constant_identifier_names
+  static const String LOGIN = "$BASE_URL_PARASOL/api/login";
+
+  // ignore: constant_identifier_names
+  static const String REGISTER_MOBILE_OTP_SEND = "$BASE_URL_PARASOL/api/send_otp";
+
+  // ignore: constant_identifier_names
+  static const String REGISTER_MOBILE_OTP = "$BASE_URL_PARASOL/api/verify_otp";
+
+  // ignore: constant_identifier_names
+  static const String REGISTER_APP_USER = "$BASE_URL_PARASOL/api/register";
 }
