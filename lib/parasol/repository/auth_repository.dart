@@ -24,17 +24,17 @@ class AuthParasolRepository {
   }
 
 //
-// Future<SendVerificationModel> sendOTP(
-//     {required Map<String, dynamic> body}) async {
-//   try {
-//     dynamic response =
-//         await apiService.getPostApiResponse(AppUrls.sendVerification, body);
-//     return SendVerificationModel.fromJson(response);
-//   } catch (e) {
-//     rethrow;
-//   }
-// }
-//
+Future otpverify(body
+    ) async {
+  try {
+    dynamic response =
+        await apiService.postApi(AppUrls.REGISTER_MOBILE_OTP, body);
+    return response;
+  } catch (e) {
+    rethrow;
+  }
+}
+
 // Future<OtpCheckModel> checkOTP({required Map<String, dynamic> body}) async {
 //   try {
 //     dynamic response =

@@ -1,11 +1,9 @@
-import 'package:blog_new_pretice/parasol/view/SignUp/singup_bloc/sigin_state.dart';
-import 'package:blog_new_pretice/view_model/singin_bloc/sigin_state.dart';
-import 'package:email_validator/email_validator.dart';
-import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../repository/auth_repository.dart';
-import 'signin_event.dart';
+import 'otp_send_event.dart';
+import 'otpsend_state.dart';
 
 class OtpSendBloc extends Bloc<OtpSendEvent, OtpSendState> {
   OtpSendBloc() : super(OtpSendInitialState()) {

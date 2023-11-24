@@ -3,10 +3,9 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:blog_new_pretice/parasol/view/SignUp/singup_bloc/signin_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../../../res/customs/custom_label_for_text_field.dart';
 import '../../../../res/customs/custom_text_button.dart';
@@ -16,7 +15,6 @@ import '../../../../res/customs/customs_submit_button.dart';
 import '../../../../res/utils/colors_code.dart';
 import '../../../../res/utils/images.dart';
 import '../../../../res/utils/styles.dart';
-import '../../../../view_model/singin_bloc/signin_bloc.dart';
 import '../../SignUp/ui/otp_send_for_registration.dart';
 
 // ignore: must_be_immutable
@@ -89,6 +87,39 @@ class _MobileSignInViewState extends State<MobileSignInView> {
                     // validator: Validator.validateEmail,
                   ),
                   // Style.distan_size10,
+                  PinCodeTextField(
+                    length: 6,
+                    obscureText: false,
+                    animationType: AnimationType.fade,
+                    pinTheme: PinTheme(
+                      shape: PinCodeFieldShape.box,
+                      borderRadius: BorderRadius.circular(5),
+                      fieldHeight: 40,
+                      fieldWidth: 40,
+                      activeFillColor: Colors.white,
+                    ),
+                    // animationDuration: Duration(milliseconds: 300),
+                    // backgroundColor: Colors.blue.shade50,
+                    // enableActiveFill: true,
+                    // errorAnimationController: errorController,
+                    controller: null,
+                    onCompleted: (v) {
+                      print("Completed");
+                    },
+                    onChanged: (value) {
+                      print(value);
+                      setState(() {
+                     //   currentText = value;
+                      });
+                    },
+                    beforeTextPaste: (text) {
+                      print("Allowing to paste $text");
+                      //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
+                      //but you can show anything you want here, like your pop up saying wrong paste format or etc
+                      return true;
+                    }, appContext: context,
+                  ),
+
                   const CustomLabelField(
                     text: "Password",
                     style: Style.robotoRegular,
