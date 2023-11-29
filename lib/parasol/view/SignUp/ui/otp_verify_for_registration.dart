@@ -14,6 +14,7 @@ import '../../../../res/customs/customs_submit_button.dart';
 import '../../../../res/utils/colors_code.dart';
 import '../../../../res/utils/images.dart';
 import '../../../../res/utils/styles.dart';
+import '../../SigninView/ui/signin_view.dart';
 import '../otp_verification_send_bloc/otpsend_bloc.dart';
 
 // ignore: must_be_immutable
@@ -94,6 +95,19 @@ class _OtpVerifyForRegistrationState extends State<OtpVerifyForRegistration> {
                             style: Style.text_style_primary,
                           ),
                           Style.distan_size15,
+                          BlocBuilder<OtpVerifyBloc, OtpVerifyState>(
+                            builder: (BuildContext context, OtpVerifyState state) {
+                              if (state is OtpVerifyErrorState) {
+                                return Text(
+                                  state.errorMessage,
+                                  style: TextStyle(color: Colors.red),
+                                );
+                              } else {
+                                return Container();
+                              }
+                            },
+                          ),
+                          Style.distan_size5,
 
                           PinCodeTextField(
                             length: 6,
@@ -110,15 +124,17 @@ class _OtpVerifyForRegistrationState extends State<OtpVerifyForRegistration> {
                             backgroundColor: Colors.blue.shade50,
                             enableActiveFill: true,
                             errorAnimationController: errorController,
-                            controller: null,
+                            controller: textEditingController,
                             onCompleted: (v) {
                               print("Completed $v");
                             },
                             onChanged: (value) {
+                              BlocProvider.of<OtpVerifyBloc>(context)
+                                  .add(OtpVerifyTextChangeEvent(textEditingController.text));
                               print(value);
-                              setState(() {
-                                currentText = value;
-                              });
+                              // setState(() {
+                              //   currentText = value;
+                              // });
                             },
                             beforeTextPaste: (text) {
                               print("Allowing to paste $text");
@@ -153,7 +169,10 @@ class _OtpVerifyForRegistrationState extends State<OtpVerifyForRegistration> {
                             if (state is OtpVerifyLoadingState) {
                               return CircularProgressIndicator();
                             } else if (state
-                                is OtpVerifyFetchingSuccessfulState) {}
+                                is OtpVerifyFetchingSuccessfulState) {
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>MobileSignInView()));
+
+                            }
                             return CustomSubmitButton(
                                 text: "Send OTP",
                                 style: Style.submit_button_style,
@@ -177,66 +196,7 @@ class _OtpVerifyForRegistrationState extends State<OtpVerifyForRegistration> {
                                 borderCircular: 12);
                           }),
 
-                          // Countdown(
-                          //   controller: registertController.countdownController,
-                          //   seconds: 15,
-                          //   interval: const Duration(milliseconds: 1000),
-                          //   build: (context, currentRemainingTime) {
-                          //     if (currentRemainingTime == 0.0) {
-                          //       return GestureDetector(
-                          //         onTap: () {
-                          //           // write logic here to resend OTP
-                          //         },
-                          //         child: Container(
-                          //           alignment: Alignment.center,
-                          //           padding: const EdgeInsets.only(
-                          //               left: 14,
-                          //               right: 14,
-                          //               top: 14,
-                          //               bottom: 14),
-                          //           decoration: BoxDecoration(
-                          //               borderRadius: const BorderRadius.all(
-                          //                 Radius.circular(10),
-                          //               ),
-                          //               border: Border.all(
-                          //                   color: Colors.blue, width: 1),
-                          //               color: Colors.blue),
-                          //           width: context.width,
-                          //           child: const Text(
-                          //             "Resend OTP",
-                          //             style: TextStyle(
-                          //                 fontSize: 14,
-                          //                 fontWeight: FontWeight.bold,
-                          //                 color: Colors.white),
-                          //           ),
-                          //         ),
-                          //       );
-                          //     } else {
-                          //       return Container(
-                          //         alignment: Alignment.center,
-                          //         padding: const EdgeInsets.only(
-                          //             left: 14, right: 14, top: 14, bottom: 14),
-                          //         decoration: BoxDecoration(
-                          //           borderRadius: const BorderRadius.all(
-                          //             Radius.circular(10),
-                          //           ),
-                          //           border: Border.all(
-                          //               color: Colors.blue, width: 1),
-                          //         ),
-                          //         width: context.width,
-                          //         child: Text(
-                          //             "Wait |${currentRemainingTime
-                          //                 .toString()
-                          //                 .length == 6
-                          //                 ? " ${currentRemainingTime.toString()
-                          //                 .substring(0, 2)}"
-                          //                 : " ${currentRemainingTime.toString()
-                          //                 .substring(0, 1)}"}",
-                          //             style: const TextStyle(fontSize: 16)),
-                          //       );
-                          //     }
-                          //   },
-                          // ),
+
                         ],
                       ),
                     )))));

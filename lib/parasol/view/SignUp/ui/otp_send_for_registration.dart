@@ -57,25 +57,6 @@ class _OtpSendForRegitrationState extends State<OtpSendForRegitration> {
                     },
                   ),
 
-                  // CustomTextFieldPassword(
-                  //   baseColor: ColorsCode.text_field_base_colors,
-                  //   borderColor: ColorsCode.text_border_color,
-                  //   errorColor: ColorsCode.text_field_error_colors,
-                  //   controller: mobile,
-                  //   hint: "Mobile number",
-                  //   inputType: TextInputType.number,
-                  //
-                  //   icon: Icon(
-                  //     Icons.phone,
-                  //     color: ColorsCode.hint_text_color,
-                  //   ),
-                  //   eyesIcon: false,
-                  //   onChanged: (val){
-                  //     BlocProvider.of<OtpSendBloc>(context)
-                  //         .add(OtpSendTextChangeEvent(mobile.text));
-                  //
-                  //   },
-                  // ),
 
                   Padding(
                     padding:  EdgeInsets.only(left: 12,right: 12),
